@@ -36,8 +36,14 @@ declare class YoutubeMp3Downloader {
   performDownload(task, callback: (errorNessage?: string, output?: any) => void): void;
 
   on(event: 'queueSize', listener: (total : number) => void): this;
+  on(event: 'addToQueue' | 'gettingInfo', listener: (videoId: string) => void): this;
   on(event: 'error' | 'finished', listener: (err: any, data: any) => void): this;
   on(event: 'progress', listener: (video: YoutubeMp3Downloader.IVideoTask) => void): this;
+
+  once(event: 'queueSize', listener: (total : number) => void): this;
+  once(event: 'addToQueue' | 'gettingInfo', listener: (videoId: string) => void): this;
+  once(event: 'error' | 'finished', listener: (err: any, data: any) => void): this;
+  once(event: 'progress', listener: (video: YoutubeMp3Downloader.IVideoTask) => void): this;
 }
 
 declare module 'youtube-mp3-downloader' {
