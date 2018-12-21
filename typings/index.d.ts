@@ -34,7 +34,7 @@ declare class YoutubeMp3Downloader {
   cleanFileName(fileName: string): string;
   download(videoId: string, fileName?: string): void;
   performDownload(task, callback: (errorNessage?: string, output?: any) => void): void;
-
+  setOutputPath(parh: string): void;
   on(event: 'queueSize', listener: (total : number) => void): this;
   on(event: 'addToQueue' | 'gettingInfo', listener: (videoId: string) => void): this;
   on(event: 'error' | 'finished', listener: (err: any, data: any) => void): this;
