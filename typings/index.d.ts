@@ -1,11 +1,15 @@
 declare module YoutubeMp3Downloader {
+  export type DownloadFilter = 'audioandvideo' | 'video' | 'videoonly' | 'audio' | 'audioonly';
+  export type DownloadQuality = 'lowest' | 'highest' | string | number;
+
   export interface IYoutubeMp3DownloaderOptions {
     ffmpegPath?: string;
     outputPath: string;
     // https://github.com/fent/node-ytdl-core/blob/0574df33f3382f3a825e4bef30f21e51cd78eafe/typings/index.d.ts#L7
-    youtubeVideoQuality?: 'lowest' | 'highest' | string | number;
+    youtubeVideoQuality?: DownloadQuality;
     queueParallelism: number;
     progressTimeout: number;
+    filter?: DownloadFilter;
   }
 
   export interface IResultObject {
@@ -35,6 +39,7 @@ declare class YoutubeMp3Downloader {
   download(videoId: string, fileName?: string): void;
   performDownload(task, callback: (errorNessage?: string, output?: any) => void): void;
   setOutputPath(parh: string): void;
+  setQuality(quality: YoutubeMp3Downloader.DownloadQuality)
   on(event: 'queueSize', listener: (total : number) => void): this;
   on(event: 'addToQueue' | 'gettingInfo', listener: (videoId: string) => void): this;
   on(event: 'error' | 'finished', listener: (err: any, data: any) => void): this;
