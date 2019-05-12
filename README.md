@@ -1,6 +1,12 @@
+[![TypeScript](https://badges.frapsoft.com/typescript/love/typescript.svg?v=101)](https://github.com/moshfeu/youtube-mp3-downloader/blob/master/typings/index.d.ts)
+
 # Youtube MP3 Downloader
 
 Youtube MP3 Downloader is a module which allows to specify YouTube videos from which the audio data should be extracted, converted to MP3, and stored on disk.
+
+## 🔮 <span style="color: red">Notice: seems like the original repository is not getting updates </span> 🔮
+
+### 🎉<span style="color: green">In this repository you can find more features</span> 🎉
 
 ## Installation
 
@@ -10,13 +16,15 @@ To run this project, you need to have a local installation of FFmpeg present on 
 
 ### Installation via NPM
 
-`npm install youtube-mp3-downloader --save`
+<strike>`npm install youtube-mp3-downloader --save`</strike>
+
+`npm install https://github.com/moshfeu/youtube-mp3-downloader --save`
 
 ### Installation from Github
 
 #### Checkout the project from Github to a local folder
 
-`git clone https://github.com/tobilg/youtube-mp3-downloader.git`
+`git clone https://github.com/moshfeu/youtube-mp3-downloader`
 
 #### Install module dependencies
 
@@ -37,7 +45,8 @@ var YD = new YoutubeMp3Downloader({
     "outputPath": "/path/to/mp3/folder",    // Where should the downloaded and encoded files be stored?
     "youtubeVideoQuality": "highest",       // What video quality should be used?
     "queueParallelism": 2,                  // How many parallel downloads/encodes should be started?
-    "progressTimeout": 2000                 // How long should be the interval of the progress reports
+    "progressTimeout": 2000,                // How long should be the interval of the progress reports
+    "format" : "aac"                        // Audio format ('mp3'/'ogg'/'wav'/'flac'/'m4a'/'wma'/'aac')
 });
 
 //Download video and save as MP3 file
@@ -117,7 +126,7 @@ var YoutubeMp3Downloader = require("youtube-mp3-downloader");
 var Downloader = function() {
 
     var self = this;
-    
+
     //Configure YoutubeMp3Downloader with your settings
     self.YD = new YoutubeMp3Downloader({
         "ffmpegPath": "/path/to/ffmpeg",        // Where is the FFmpeg binary located?
@@ -131,25 +140,25 @@ var Downloader = function() {
     self.callbacks = {};
 
     self.YD.on("finished", function(error, data) {
-		
+
         if (self.callbacks[data.videoId]) {
             self.callbacks[data.videoId](error, data);
         } else {
             console.log("Error: No callback for videoId!");
         }
-    
+
     });
 
     self.YD.on("error", function(error, data) {
-	
+
         console.error(error + " on videoId " + data.videoId);
-    
+
         if (self.callbacks[data.videoId]) {
             self.callbacks[data.videoId](error, data);
         } else {
             console.log("Error: No callback for videoId!");
         }
-     
+
     });
 
 };
@@ -157,7 +166,7 @@ var Downloader = function() {
 Downloader.prototype.getMP3 = function(track, callback){
 
     var self = this;
-	
+
     // Register callback
     self.callbacks[track.videoId] = callback;
     // Trigger download
@@ -184,4 +193,15 @@ dl.getMP3({videoId: "Vhd6Kc4TZls", name: "Cold Funk - Funkorama.mp3"}, function(
         console.log("Song "+ i + " was downloaded: " + res.file);
     }
 });
+```
+
+## API
+
+```typescript
+cleanFileName(fileName: string) // remove unnecessary characters
+download(videoId: string, fileName?: string) // Add download to the queue
+performDownload(task: IDwonloadTask, callback: (errorNessage?: string, output?: any) => void) // trigger the download itself
+setOutputPath(path: string) // change the downloads path.
+setQuality(quality: 'lowest' | 'highest' | string | number) // change the audio's quality (see https://github.com/fent/node-ytdl-core#ytdlurl-options)
+
 ```

@@ -10,6 +10,7 @@ declare module YoutubeMp3Downloader {
     queueParallelism: number;
     progressTimeout: number;
     filter?: DownloadFilter;
+    format?: 'mp3' | 'ogg' | 'wav' | 'flac' | 'm4a' | 'wma' | 'aac';
   }
 
   export interface IResultObject {
@@ -32,12 +33,17 @@ declare module YoutubeMp3Downloader {
   }
 }
 
+interface IDwonloadTask {
+  videoId: videoId,
+  fileName: fileName
+}
+
 declare class YoutubeMp3Downloader {
   constructor(options: YoutubeMp3Downloader.IYoutubeMp3DownloaderOptions)
 
   cleanFileName(fileName: string): string;
   download(videoId: string, fileName?: string): void;
-  performDownload(task, callback: (errorNessage?: string, output?: any) => void): void;
+  performDownload(task: IDwonloadTask, callback: (errorNessage?: string, output?: any) => void): void;
   setOutputPath(parh: string): void;
   setQuality(quality: YoutubeMp3Downloader.DownloadQuality)
   on(event: 'queueSize', listener: (total : number) => void): this;
