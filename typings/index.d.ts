@@ -1,6 +1,7 @@
 declare module YoutubeMp3Downloader {
   export type DownloadFilter = 'audioandvideo' | 'video' | 'videoonly' | 'audio' | 'audioonly';
   export type DownloadQuality = 'lowest' | 'highest' | string | number;
+  export type DownloadFormat = 'mp3' | 'ogg' | 'wav' | 'flac' | 'm4a' | 'wma' | 'aac';
 
   export interface IYoutubeMp3DownloaderOptions {
     ffmpegPath?: string;
@@ -10,7 +11,7 @@ declare module YoutubeMp3Downloader {
     queueParallelism: number;
     progressTimeout: number;
     filter?: DownloadFilter;
-    format?: 'mp3' | 'ogg' | 'wav' | 'flac' | 'm4a' | 'wma' | 'aac';
+    format?: DownloadFormat;
   }
 
   export interface IResultObject {
@@ -45,7 +46,8 @@ declare class YoutubeMp3Downloader {
   download(videoId: string, fileName?: string): void;
   performDownload(task: IDwonloadTask, callback: (errorNessage?: string, output?: any) => void): void;
   setOutputPath(parh: string): void;
-  setQuality(quality: YoutubeMp3Downloader.DownloadQuality)
+  setQuality(quality: YoutubeMp3Downloader.DownloadQuality): void;
+  setFormat(format: YoutubeMp3Downloader.DownloadFormat): void;
   on(event: 'queueSize', listener: (total : number) => void): this;
   on(event: 'addToQueue' | 'gettingInfo', listener: (videoId: string) => void): this;
   on(event: 'error' | 'finished', listener: (err: any, data: any) => void): this;
