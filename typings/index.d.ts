@@ -34,8 +34,8 @@ declare module YoutubeMp3Downloader {
 }
 
 interface IDwonloadTask {
-  videoId: videoId,
-  fileName: fileName
+  videoId: string;
+  fileName: string;
 }
 
 declare class YoutubeMp3Downloader {
