@@ -1,7 +1,7 @@
 declare module YoutubeMp3Downloader {
   export type DownloadFilter = 'audioandvideo' | 'video' | 'videoonly' | 'audio' | 'audioonly';
   export type DownloadQuality = 'lowest' | 'highest' | string | number;
-  export type DownloadFormat = 'mp3' | 'ogg' | 'wav' | 'flac' | 'm4a' | 'wma' | 'aac';
+  export type DownloadFormat = 'mp3' | 'ogg' | 'wav' | 'flac' | 'm4a' | 'wma' | 'aac' | 'mp4' | 'mpg' | 'wmv';
 
   export interface IYoutubeMp3DownloaderOptions {
     ffmpegPath?: string;
