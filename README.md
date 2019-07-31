@@ -2,7 +2,7 @@
 
 # Youtube MP3 Downloader
 
-Youtube MP3 Downloader is a module which allows to specify YouTube videos from which the audio data should be extracted, converted to MP3, and stored on disk.
+Youtube MP3 Downloader is a module which allows to specify YouTube videos from which the audio data should be extracted, converted to different audio and video formats, and stored on disk.
 
 ### 🎉<span style="color: green">In this repository you can find more features</span> 🎉
 
@@ -44,7 +44,7 @@ var YD = new YoutubeMp3Downloader({
     "youtubeVideoQuality": "highest",       // What video quality should be used?
     "queueParallelism": 2,                  // How many parallel downloads/encodes should be started?
     "progressTimeout": 2000,                // How long should be the interval of the progress reports
-    "format" : "aac"                        // Audio format ('mp3'/'ogg'/'wav'/'flac'/'m4a'/'wma'/'aac')
+    "format" : "aac"                        // Audio format ('mp3'/'ogg'/'wav'/'flac'/'m4a'/'wma'/'aac'/'mp4'/'mpg'/'wmv')
 });
 
 //Download video and save as MP3 file
